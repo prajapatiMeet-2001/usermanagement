@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body style="padding: 16px;" ng-app='mainapp'>
+	<div ng-controller='maincontroller'>
+		<nav class="navbar navbar-expand-sm">
+		  	<!-- Links -->
+		  	<ul class="navbar-nav">
+		  		<li class="nav-item">
+			      <a class="nav-link" onclick="showprofile()"><button type="button" class="btn btn-outline-primary">My Profile</button></a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" onclick="showallusers()"><button type="button" class="btn btn-outline-primary">All Users</button></a>
+			    </li>
+			</ul>
+		  <button ng-click='signout()'class="btn btn-outline-danger">Sign Out</button>
+		</nav><br>
+
+        <div id="profile" class="container">
+            <h4>My Profile</h4>
+            <br>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="user._id" readonly hidden>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="user.fname" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="user.lname" placeholder="Last Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" class="form-control" ng-model="user.phone" placeholder="9994440000" required minlength="10" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" ng-model="user.email" placeholder="name@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" ng-model="user.dob" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="user.state" placeholder="State" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="user.city" placeholder="City" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="number" class="form-control" ng-model="user.pincode" placeholder="Pincode" required maxlength="6">
+                </div>
+
+                <button ng-click='editdata(user)' class="btn btn-success btn-block">Edit</button>
+        </div>
+        <div id="users" class="container" style="display: none;">
+            <h4>List of Users</h4><br>
+            <table class="table table-hover table-responsive ">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Date of Birth</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Pincode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="userdata in users">
+                        <td><div class="form-control" readonly>{{userdata.fname}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.lname}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.email}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.phone}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.dob | date}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.city}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.state}}</div></td>
+                        <td><div class="form-control" readonly>{{userdata.pincode}}</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+	</div>
+
+</body>
+<script>
+    function showprofile() 
+    {
+        document.getElementById("profile").style.display = "block";
+        document.title = "My Profile"
+        document.getElementById("users").style.display = "none";
+    }
+    function showallusers() 
+    { 
+        document.getElementById("profile").style.display = "none";
+        document.title = "All Users"
+        document.getElementById("users").style.display = "block";
+    }
+    </script>
+</html>
